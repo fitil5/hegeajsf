@@ -1,0 +1,41 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/layout/templateSinMenu.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+
+			<p:messages id="messages" showDetail="true" closable="true">
+				<p:autoUpdate />
+			</p:messages>
+			<p:panel header="Introduzca su nuevo password">
+				<h:panelGrid columns="3" cellpadding="3">
+
+
+					<h:outputLabel for="password" value="Nueva Password:" />
+					<p:password id="password"
+						value="#{changePasswordManagerBean.pass1}"
+						validatorMessage="Debe tener mínimo 8 caracteres, al menos 1 mayúscula, 1 número, y algún caracter especial">
+						<f:validateRegex
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@s$!%*?])[A-Za-z\d$@$!%*?.]{8,15}[^'\s]" />
+					</p:password>
+					
+					<br />
+
+					<h:outputLabel for="password" value="Repita su Password:" />
+					<p:password id="password2"
+						value="#{changePasswordManagerBean.pass2}" />
+
+
+				</h:panelGrid>
+				<p:commandButton value="Guardar" icon="ui-icon-check"
+					validateClient="true"
+					action="#{changePasswordManagerBean.changePassword()}" />
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

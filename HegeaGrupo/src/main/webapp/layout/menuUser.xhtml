@@ -1,0 +1,39 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<body style="background-image: url(/images/admin.jpg);
+ 	s-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;"> 
+
+	<h:form id="menu">
+		<div class="clearfix">
+		<p:menubar>
+		<p:submenu label="Zona Usuario" icon="fa fa-fw fa-user">
+			<p:menuitem value="Home Usuario"
+				url="/pages/user/homeuser.xhtml"
+				icon="fa fa-fw fa-ra" />
+			<p:menuitem value="Alta Actividad"
+				url="/pages/user/Alta_actividades.xhtml"
+				icon="fa fa-fw fa-search" />
+				
+		</p:submenu>
+			
+				
+				<f:facet name="options">
+			<h:form icon="fa fa-sign-out"
+				onsubmit="this.action='#{request.contextPath}/logout';"
+				class="logout-form">
+				<p:commandButton value="Logout" ajax="false" />
+			</h:form>
+		</f:facet>
+			</p:menubar>
+		</div>
+	</h:form>
+	</body>
+
+</ui:composition>

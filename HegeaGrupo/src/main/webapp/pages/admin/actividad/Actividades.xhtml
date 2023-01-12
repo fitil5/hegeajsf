@@ -1,0 +1,49 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/layout/templateAdmin.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+		<p:outputLabel for="year" value="Año: " />
+            <p:selectOneMenu id="year" value="#{actividadAdminC.dayMonthYearDTO.year}" style="width:150px">
+             <p:ajax listener="#{actividadAdminC.onYearChange}" update="panelDias" />
+                <f:selectItem itemLabel="Select proyecto" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{actividadAdminC.year}" />
+            </p:selectOneMenu>
+            <p:outputLabel for="meses" value="Meses: " />
+            <p:selectOneMenu id="meses" value="#{actividadAdminC.dayMonthYearDTO.mes}" style="width:150px">
+             <p:ajax listener="#{actividadAdminC.onMesChange}" update="panelDias" />
+                <f:selectItem itemLabel="Select proyecto" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{actividadAdminC.meses}" />
+            </p:selectOneMenu>
+            
+		<p:dataTable id="panelDias" var="item" rows="10" widgetVar="item" value="#{actividadAdminC.dayMonthYearDTO}">		
+				<p:column headerText="Lunes" >
+				<p:selectBooleanButton id="lunes" value="#{item.lunes}" onLabel="Yes" offLabel="No" style="width:60px" />
+				</p:column>
+				<p:column headerText="Martes" >
+				<p:selectBooleanButton id="martes" value="#{item.martes}" onLabel="Yes" offLabel="No" style="width:60px" />
+				</p:column>
+				<p:column headerText="Miercoles" >
+				<p:selectBooleanButton id="miercoles" value="#{item.miercoles}" onLabel="Yes" offLabel="No" style="width:60px" />
+				</p:column>
+				<p:column headerText="Jueves" >
+				<p:selectBooleanButton id="jueves" value="#{item.jueves}" onLabel="Yes" offLabel="No" style="width:60px" />
+				</p:column>
+				<p:column headerText="Viernes" >
+				<p:selectBooleanButton id="viernes" value="#{item.viernes}" onLabel="Yes" offLabel="No" style="width:60px" />
+				</p:column>			
+			</p:dataTable>	
+			
+			  
+		<p:commandButton value="Save" ajax="false"
+				 icon="ui-icon-disk" actionListener="#{actividadAdminC.asignarDiasSemana()}"/>	
+				 <!-- update="messages" action="#{actividadAdminC.createNewActividad()}" actionListener="#{actividadAdminC.}"-->
+					
+		</h:form>
+	</ui:define>
+</ui:composition>

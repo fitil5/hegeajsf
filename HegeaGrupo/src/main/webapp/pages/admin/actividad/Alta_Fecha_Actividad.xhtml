@@ -1,0 +1,83 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/layout/templateAdmin.xhtml">
+
+	<ui:define name="body">
+	<b:jumbotron>
+		<h:form id="form1">
+		<p:growl id="msgs" showDetail="true" />
+			<p:outputLabel for="years" value="Año: " />
+            <p:selectOneMenu id="years" value="#{actividadAdminController.dayMonthYearDTO.year}" style="width:150px">
+             <p:ajax listener="#{actividadAdminController.onYearChange}" update="panelDias restricted" />
+                <f:selectItem itemLabel="Select proyecto" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{actividadAdminController.year}" />
+            </p:selectOneMenu>
+            <p:outputLabel for="meses" value="Meses: " />
+            <p:selectOneMenu id="meses" value="#{actividadAdminController.dayMonthYearDTO.mes}" style="width:150px">
+             <p:ajax listener="#{actividadAdminController.onMesChange}" update="panelDias restricted" />
+                <f:selectItem itemLabel="Select proyecto" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{actividadAdminController.meses}" />
+            </p:selectOneMenu>
+          
+		<p:dataTable id="panelDias" var="item" rows="10" widgetVar="item" value="#{actividadAdminController.dayMonthYearDTO}">		
+				<p:column headerText="Lunes" >
+				<p:selectBooleanButton id="lunes" value="#{item.lunes}" onLabel="Yes" offLabel="No" style="width:60px" >
+				<p:ajax update="form1:msgs" listener="#{actividadAdminController.addMessage}" />
+				</p:selectBooleanButton>
+				</p:column>
+				<p:column headerText="Martes" >
+				<p:selectBooleanButton id="martes" value="#{item.martes}" onLabel="Yes" offLabel="No" style="width:60px" >
+				<p:ajax update="form1:msgs panelDias" listener="#{actividadAdminController.addMessage}" />
+				</p:selectBooleanButton>
+				</p:column>
+				<p:column headerText="Miercoles" >
+				<p:selectBooleanButton id="miercoles" value="#{item.miercoles}" onLabel="Yes" offLabel="No" style="width:60px" >
+				<p:ajax update="form1:msgs panelDias" listener="#{actividadAdminController.addMessage}" />
+				</p:selectBooleanButton>
+				</p:column>
+				<p:column headerText="Jueves" >
+				<p:selectBooleanButton id="jueves" value="#{item.jueves}" onLabel="Yes" offLabel="No" style="width:60px" >
+				<p:ajax update="form1:msgs panelDias" listener="#{actividadAdminController.addMessage}" />
+				</p:selectBooleanButton>
+				</p:column>
+				<p:column headerText="Viernes" >
+				<p:selectBooleanButton id="viernes" value="#{item.viernes}" onLabel="Yes" offLabel="No" style="width:60px" >
+				<p:ajax update="form1:msgs panelDias" listener="#{actividadAdminController.addMessage}" />
+				</p:selectBooleanButton>
+				</p:column>			
+			</p:dataTable>	
+			
+			  
+		<p:commandButton value="Save" ajax="false"
+				 icon="ui-icon-disk" actionListener="#{actividadAdminController.asignarDiasSemana()}"/>	
+				 <!-- update="messages" action="#{actividadAdminC.createNewActividad()}" actionListener="#{actividadAdminC.}"-->
+			<h:panelGrid columns="2" cellpadding="5">
+				 <p:outputLabel for="nombre_act" value="Nombre actividad: " />
+            <p:selectOneMenu id="nombre_act" value="#{actividadAdminController.newFechaActividad.nombre_act}" style="width:150px" update="restricted">
+             <!--   <p:ajax listener="#{crudController.onCountryChange}" update="country" />-->
+                <f:selectItem itemLabel="Select actividad" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{actividadAdminController.nombreActividad}" />
+            </p:selectOneMenu>
+  <p:outputLabel for="restricted" value="Calendario:" />
+        <p:calendar id="restricted" value="#{actividadAdminController.newFechaActividad.fecha}" mindate="#{actividadAdminController.minDay}" maxdate="#{actividadAdminController.maxDay}" pattern="dd/MM/yyyy">
+         <!--  -->   <p:ajax event="dateSelect" listener="#{actividadAdminController.onDateSelect}" update="msgs" />
+        </p:calendar>
+				
+
+
+			
+
+
+			</h:panelGrid>
+			<p:commandButton value="Save" ajax="false"
+				actionListener="#{actividadAdminController.createNewFechaActividad()}" icon="ui-icon-disk"
+				update="messages"  />
+
+		</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>

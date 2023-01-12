@@ -1,0 +1,79 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/layout/templateAdmin.xhtml">
+
+	<ui:define name="body">
+		<h1 style="color:green;">HOME USER</h1 >
+		<!--   <h:form onsubmit="this.action='#{request.contextPath}/logout';"
+    class="logout-form">
+    <p:commandButton value="Logout" ajax="false" />
+  </h:form> -->
+  <h:form id="form">
+<p:growl id="msgs" showDetail="true" />
+					<p:dataTable id="panelFechaActividades" var="item" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="2,5,10,15"
+				value="#{actividadAdminController.listFechaActividadDTO}" widgetVar="fechaactividadTable"
+				emptyMessage="No se han encontrado fecha de actividades "
+				filteredValue="#{actividadAdminController.listFechaActividadDTO}">
+				<f:facet name="header">
+					<p:outputPanel>
+						<h:outputText value="Busqueda de fecha Actividades: " />
+						<p:inputText id="globalFilter" onkeyup="PF('panelFechaActividades').filter()"
+							style="width:150px" placeholder="Ej. A709010" />
+					</p:outputPanel>
+				</f:facet>
+				
+				<p:column filterBy="#{item.fecha}" headerText="Fecha actividad"
+					filterMatchMode="contains">
+					<h:outputText value="#{item.fecha}" />
+				</p:column>
+
+				<p:column filterBy="#{item.nombre_act}" headerText="Nombre actividad"
+					filterMatchMode="contains">
+					<h:outputText value="#{item.nombre_act}" />
+				</p:column>	
+					
+				
+
+			</p:dataTable>		
+				
+				
+				
+				
+				
+			<h:panelGrid columns="2" cellpadding="5">
+				 <p:outputLabel for="actividad" value="Nombre actividad: " />
+            <p:selectOneMenu id="actividad" value="#{actividadUserController.newAltaActividad.actividad}" style="width:150px">
+            <!--  <p:ajax listener="#{actividadUserController.onActividadChange}" update="restricted" />-->
+                <f:selectItem itemLabel="Select actividad" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{actividadUserController.actividades}" />
+            </p:selectOneMenu>
+ <!-- <p:outputLabel for="restricted" value="Restricted:" />
+          <p:calendar id="restricted" value="#{actividadUserController.newAltaActividad.fechaActividad}" mindate="#{actividadUserController.minDay}" maxdate="#{actividadUserController.maxDay}" readonly="true" disabledWeekends="true" disabled="#{actividadUserController.primerasemana}" />-->
+       <!--  <p:outputLabel for="restricted" value="Calendario:" />
+        <p:calendar id="restricted" value="#{actividadUserController.newAltaActividad.fecha_actividad}" mindate="#{actividadUserController.minDay}" maxdate="#{actividadUserController.maxDay}" pattern="dd/MM/yyyy" readonly="true" disabledWeekends="true" disabled="#{actividadUserController.primerasemana}">
+              <p:ajax event="dateSelect" listener="#{actividadUserController.onDateSelect}" update="msgs" />
+        </p:calendar>  -->
+         <p:calendar id="restricted" value="#{actividadUserController.newAltaActividad.fecha_actividad}" mindate="#{actividadUserController.minDay}" maxdate="#{actividadUserController.maxDay}" pattern="dd/MM/yyyy" readonly="true">
+            <p:ajax event="dateSelect" listener="#{actividadUserController.onDateSelect}" update="msgs" />
+        </p:calendar>
+				
+
+			
+
+
+			</h:panelGrid>
+			<p:commandButton value="Save" ajax="false"
+				actionListener="#{actividadUserController.createNewAltaActividad()}" icon="ui-icon-disk" 
+				update="messages" />
+<!-- disableAllTheseDays  -->
+		
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

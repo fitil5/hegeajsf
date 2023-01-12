@@ -1,0 +1,68 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/layout/templateAdmin.xhtml">
+
+	<ui:define name="body">
+	<b:jumbotron>
+	
+		<h:form >
+
+			<h:panelGrid  columns="2" cellpadding="5">
+				<h:outputLabel for="username" value="DAS: " />
+				<p:inputText id="username" label="Das"
+					value="#{crudController.newUsuario.username}">
+					
+				</p:inputText>
+
+				<h:outputLabel for="nombre" value="Nombre: " />
+				<p:inputText id="nombre" label="Nombre"
+					value="#{crudController.newUsuario.nombre}"  />
+
+				<h:outputLabel for="apellido" value="Apellido: " />
+				<p:inputText id="apellido" label="Apellido"
+					value="#{crudController.newUsuario.apellidos}" />
+
+				<h:outputLabel for="enabled" value="Enabled: " />
+				<p:selectBooleanButton value="#{crudController.newUsuario.enabled}"
+					onLabel="Yes" offLabel="No" style="width:60px" />
+
+				<h:outputLabel for="admin" value="Admin: " />
+				<p:selectBooleanButton value="#{crudController.newUsuario.admin}"
+					onLabel="Yes" offLabel="No" style="width:60px" />
+					 <p:outputLabel for="proyecto" value="Proyecto: " />
+            <p:selectOneMenu id="proyecto" value="#{crudController.newUsuario.proyecto}" style="width:150px">
+             <!--   <p:ajax listener="#{crudController.onCountryChange}" update="country" />-->
+                <f:selectItem itemLabel="Select proyecto" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{crudController.proyectoList}" />
+            </p:selectOneMenu>
+<!--  
+				<p:outputLabel for="proyecto" value="Proyecto: " />
+				<p:inputText id="proyecto" label="Proyecto"
+					value="#{crudController.newUsuario.proyecto}" />
+-->
+<!--
+				<p:outputLabel for="organizationalunit"
+					value="Organizational Unit: " />
+				<p:inputText id="organizationalunit" label="OrganizationalUnit"
+					value="#{crudController.newUsuario.organizacion}" />
+					-->
+					 <p:outputLabel for="organizacion" value="Organizational Unit: " />
+ 			<p:selectOneMenu id="organizacion" value="#{crudController.newUsuario.organizacion}" style="width:150px">
+               <!-- <p:ajax listener="#{crudController.onCountryChange}" update="organizacion" />-->
+                <f:selectItem itemLabel="Select Organizational Unit" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{crudController.organizacionList}" />
+            </p:selectOneMenu>
+
+			</h:panelGrid>
+			<p:commandButton value="Save" ajax="false"
+				actionListener="#{crudController.createUser()}" icon="ui-icon-disk"
+				update="messages" />
+
+		</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>

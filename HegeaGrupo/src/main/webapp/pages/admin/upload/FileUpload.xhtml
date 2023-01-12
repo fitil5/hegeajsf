@@ -1,0 +1,17 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	
+	template="/layout/templateAdmin.xhtml">
+
+	<ui:define name="body">
+<h:form enctype="multipart/form-data"  prependId="false">
+<h:outputText value="File: "></h:outputText>
+<h:inputFile value="#{fileUploadController.uploadedFile}"  />
+<h:commandButton value="Save" type="submit" action="#{fileUploadController.saveFile}" style="color: red;"></h:commandButton>
+</h:form>
+	</ui:define>
+</ui:composition>

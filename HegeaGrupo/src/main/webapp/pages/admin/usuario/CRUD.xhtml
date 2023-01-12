@@ -1,0 +1,66 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	
+	template="/layout/templateAdmin.xhtml">
+
+	<ui:define name="body">
+	<b:jumbotron>	
+	
+		<h:form id="form">
+
+			<p:dataTable id="panelUsers" var="item" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="2,5,10,15"
+				value="#{crudController.listUsersDto}" widgetVar="usersTable"
+				emptyMessage="No se han encontrado usuarios "
+				filteredValue="#{crudController.searchUsers}">
+				<f:facet name="header">
+					<p:outputPanel>
+						<h:outputText value="Busqueda de Usuarios: " />
+						<p:inputText id="globalFilter" onkeyup="PF('usersTable').filter()"
+							style="width:150px" placeholder="Ej. A709010" />
+					</p:outputPanel>
+				</f:facet>
+				<p:column filterBy="#{item.username}" headerText="DAS"
+					filterMatchMode="contains">
+					<h:outputText value="#{item.username}" />
+				</p:column>
+
+				<p:column filterBy="#{item.admin}" headerText="admin"
+					filterMatchMode="contains">
+					<h:outputText value="#{item.admin}" />
+				</p:column>
+
+				<p:column filterBy="#{item.enabled}" headerText="enabled"
+					filterMatchMode="contains">
+					<h:outputText value="#{item.enabled}" />
+				</p:column>
+
+				<p:column filterBy="#{item.changepassword}"
+					headerText="changepassword" filterMatchMode="contains">
+					<h:outputText value="#{item.changepassword}" />
+				</p:column>
+
+				<p:column filterBy="#{item.proyecto}" headerText="proyectos"
+					filterMatchMode="contains">
+					<h:outputText value="#{item.proyecto}" />
+				</p:column>
+
+				<p:column filterBy="#{item.organizacion}" headerText="organizacion"
+					filterMatchMode="contains">
+					<h:outputText value="#{item.organizacion}" />
+				</p:column>
+
+				
+
+			</p:dataTable>
+
+
+		</h:form>
+		</b:jumbotron>	
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,107 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui">
+
+
+	<body style="background-image: url(/images/admin.jpg);
+ 	s-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;"> 
+
+	<p:menubar>
+	
+			<p:menuitem value="Home Admin " url="/pages/admin/usuario/CRUD.xhtml"
+				icon="fa fa-fw fa-home" />
+
+		<p:submenu label="Usuarios" icon="fa fa-users">
+			<p:menuitem value="CRUD Usuarios" url="/pages/admin/usuario/CRUD.xhtml"
+				icon="fa fa-fw fa-ra" />
+			<p:menuitem value="Alta Usuarios" url="/pages/admin/usuario/alta.xhtml"
+				icon="fa fa-fw fa-user-plus" />
+			<p:menuitem value="Baja Usuarios" url="/pages/admin/usuario/delete.xhtml"
+				icon="fa fa-fw fa-user-times" />
+			<p:menuitem value="Editar Usuarios" url="/pages/admin/usuario/edit.xhtml"
+				icon="fa fa-fw fa-edit" />
+		</p:submenu>
+
+		<p:submenu label="Proyecto" icon="fa fa-fw fa-magic">
+			<p:menuitem value="Añadir Proyecto"
+				url="/pages/admin/proyecto/Alta_Proyecto.xhtml"
+				icon="fa fa-fw fa-fw fa-file-archive-o" />
+			<p:menuitem value="Listar Proyecto"
+				url="/pages/admin/proyecto/CRUD_Proyecto.xhtml"
+				icon="fa fa-fw fa-search" />
+			<p:menuitem value="Borrar Proyecto"
+				url="/pages/admin/proyecto/delete_Proyecto.xhtml"
+				icon="fa fa-fw fa-trash-o" />
+			<p:menuitem value="Editar Proyecto" url="/pages/admin/usuario/edit.xhtml"
+				icon="fa fa-fw fa-edit" />
+		</p:submenu>
+
+		<p:submenu label="Organizacion" icon="fa fa-fw fa-book">
+			<p:menuitem value="Añadir Organizacion"
+				url="/pages/admin/organizacion/Alta_Organizacion.xhtml"
+				icon="fa  fa-fw fa-pencil" />
+			<p:menuitem value="Listar Organizacion"
+				url="/pages/admin/organizacion/listar.xhtml"
+				icon="fa fa-fw fa-search" />
+			<p:menuitem value="Borrar Organizacion"
+				url="/pages/admin/organizacion/delete_Organizacion.xhtml"
+				icon="fa fa-fw fa-trash-o" />
+			
+		</p:submenu>
+
+		<p:submenu label="Actividades" icon="fa fa-fw fa-book">
+			<p:menuitem value="Añadir Actividad"
+				url="/pages/admin/actividad/Alta_Actividad.xhtml"
+				icon="fa  fa-fw fa-pencil" />
+			<p:menuitem value="Listar Actividad"
+				url="/pages/admin/actividad/CRUD_Actividad.xhtml"
+				icon="fa fa-fw fa-search" />
+			<p:menuitem value="Borrar Actividad"
+				url="/pages/admin/actividad/delete_Actividad.xhtml"
+				icon="fa fa-fw fa-trash-o" />
+			<p:menuitem value="Editar Actividad"
+				url="/pages/admin/actividad/edit_Actividad.xhtml" icon="fa fa-fw fa-edit" />
+				
+				<p:menuitem value="Editar Fecha Aactividad"
+				url="/pages/admin/actividad/edit_Fecha_Actividad.xhtml" icon="fa fa-fw fa-edit" />
+			<p:menuitem value="Añadir Fecha Actividad"
+				url="/pages/admin/actividad/Alta_Fecha_Actividad.xhtml"
+				icon="fa  fa-fw fa-pencil" />
+				<p:menuitem value="Añadir Fecha Actividad new"
+				url="/pages/admin/actividad/Alta_Fecha_Actividadnew.xhtml"
+				icon="fa  fa-fw fa-pencil" />
+			<p:menuitem value="Listar Fechas Actividad"
+				url="/pages/admin/actividad/CRUD_Fecha_Actividad.xhtml"
+				icon="fa fa-fw fa-search" />	
+					
+		</p:submenu>
+		
+		<p:submenu label="Zona Usuario" icon="fa fa-fw fa-user">
+			<p:menuitem value="Home Usuario"
+				url="/pages/user/homeuser.xhtml"
+				icon="fa fa-fw fa-ra" />
+			<p:menuitem value="Alta Actividad"
+				url="/pages/user/Alta_actividades.xhtml"
+				icon="fa fa-fw fa-search" />
+			<p:menuitem value="Excel"
+				url="/pages/admin/upload/FileUpload.xhtml"
+				icon="fa fa-fw fa-ra" />		
+		</p:submenu>
+			
+		<f:facet name="options">
+			<h:form icon="fa fa-sign-out"
+				onsubmit="this.action='#{request.contextPath}/logout';"
+				class="logout-form">
+				<p:commandButton value="Logout" ajax="false" />
+			</h:form>
+		</f:facet>
+	</p:menubar>
+</body>
+
+</ui:composition>

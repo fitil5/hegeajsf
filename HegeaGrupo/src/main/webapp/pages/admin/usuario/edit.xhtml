@@ -1,0 +1,106 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/layout/templateAdmin.xhtml">
+
+	<ui:define name="body">
+		<b:jumbotron>
+
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:dataTable id="item" widgetVar="item" var="item"
+				value="#{crudController.listUsersDto}" editable="true"
+				style="margin-bottom:20px" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="2,5,10,15"
+				emptyMessage="No se han encontrado usuarios "
+				filteredValue="#{crudController.searchUsers}">
+				<f:facet name="header">
+      				Editing rows
+					<p:outputPanel>
+						<h:outputText value="Busqueda de Usuarios: " />
+						<p:inputText id="globalFilter" onkeyup="PF('item').filter()"
+							style="width:150px" placeholder="Ej. A709010" />
+					</p:outputPanel>
+				</f:facet>
+
+				<p:ajax event="rowEdit" listener="#{crudController.onRowEdit}"
+					update=":form:msgs" />
+				<p:ajax event="rowEditCancel"
+					listener="#{crudController.onRowCancel}" update=":form:msgs" />
+
+				<p:column filterBy="#{item.username}" headerText="DAS"
+					filterMatchMode="contains">
+					<h:outputText value="#{item.username}" />
+				</p:column>
+
+				<p:column filterBy="#{item.changepassword}"
+					headerText="changepassword" filterMatchMode="contains">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{item.changepassword}" />
+						</f:facet>
+						<!-- <f:facet name="input">
+							<p:inputText value="#{item.changepassword}" style="width:100%"
+								label="Year" />
+						</f:facet> -->
+						<f:facet name="input">
+						  <p:selectBooleanButton value="#{item.changepassword}" onLabel="Yes" offLabel="No" style="width:60px" />
+              </f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column filterBy="#{item.enabled}" headerText="enabled"
+					filterMatchMode="contains">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{item.enabled}" />
+						</f:facet>
+						<f:facet name="input">
+							 <p:selectBooleanButton value="#{item.enabled}" onLabel="Yes" offLabel="No" style="width:60px" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column filterBy="#{item.organizacion}" headerText="organizacion"
+					filterMatchMode="contains">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{item.organizacion}" />
+						</f:facet>
+				<f:facet name="input">
+				<p:selectOneMenu id="organizacion" value="#{item.organizacion}" style="width:150px">            
+                <f:selectItem itemLabel="Select organizacion" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{crudController.organizacionList}" />
+                </p:selectOneMenu>
+				</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column filterBy="#{item.proyecto}" headerText="proyectos"
+					filterMatchMode="contains">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{item.proyecto}" />
+						</f:facet>
+						<f:facet name="input">
+				<p:selectOneMenu id="proyecto" value="#{item.proyecto}" style="width:150px">            
+                <f:selectItem itemLabel="Select proyecto" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{crudController.proyectoList}" />
+            </p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column style="width:32px">
+					<p:rowEditor />
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>

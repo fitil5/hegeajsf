@@ -1,0 +1,102 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/layout/templateAdmin.xhtml">
+
+	<ui:define name="body">
+	<b:jumbotron>
+		<h:form id="form1">
+		<p:growl id="msgs" showDetail="true" />
+			<p:outputLabel for="years" value="Año: " />
+            <p:selectOneMenu id="years" value="#{actividadAdminControllernew.dayMonthYearDTO.year}" style="width:150px">
+             <p:ajax listener="#{actividadAdminControllernew.onYearChange}" update="panelDias" />
+                <f:selectItem itemLabel="Select proyecto" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{actividadAdminControllernew.year}" />
+            </p:selectOneMenu>
+            <p:outputLabel for="meses" value="Meses: " />
+            <p:selectOneMenu id="meses" value="#{actividadAdminControllernew.dayMonthYearDTO.mes}" style="width:150px">
+             <p:ajax listener="#{actividadAdminControllernew.onMesChange}" update="panelDias" />-->
+                <f:selectItem itemLabel="Select proyecto" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{actividadAdminControllernew.meses}" />
+            </p:selectOneMenu>
+          <p:selectOneMenu id="nombre_act" value="#{actividadAdminControllernew.dayMonthYearDTO.actividad}" style="width:150px" update="restricted">
+              <p:ajax listener="#{actividadAdminControllernew.onActividadChange}" update="panelDias" />
+                <f:selectItem itemLabel="Select actividad" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{actividadAdminControllernew.nombreActividad}" />
+            </p:selectOneMenu>
+            
+            
+		<p:dataTable id="panelDias" var="item" rows="10" widgetVar="item" value="#{actividadAdminControllernew.dayMonthYearDTO}">		
+				<p:column headerText="Lunes" >
+				<p:selectBooleanButton id="lunes" value="#{item.lunes}" onLabel="Yes" offLabel="No" style="width:60px" >
+				<p:ajax update="form1:msgs form1:panel" listener="#{actividadAdminControllernew.cargarTablaNuevesActividades}" />
+				</p:selectBooleanButton>
+				</p:column>
+				<p:column headerText="Martes" >
+				<p:selectBooleanButton id="martes" value="#{item.martes}" onLabel="Yes" offLabel="No" style="width:60px" >
+				<p:ajax update="form1:msgs form1:panel" listener="#{actividadAdminControllernew.cargarTablaNuevesActividades}" />
+				</p:selectBooleanButton>
+				</p:column>
+				<p:column headerText="Miercoles" >
+				<p:selectBooleanButton id="miercoles" value="#{item.miercoles}" onLabel="Yes" offLabel="No" style="width:60px" >
+				<p:ajax update="form1:msgs form1:panel" listener="#{actividadAdminControllernew.cargarTablaNuevesActividades}" />
+				</p:selectBooleanButton>
+				</p:column>
+				<p:column headerText="Jueves" >
+				<p:selectBooleanButton id="jueves" value="#{item.jueves}" onLabel="Yes" offLabel="No" style="width:60px" >
+				<p:ajax update="form1:msgs form1:panel" listener="#{actividadAdminControllernew.cargarTablaNuevesActividades}" />
+				</p:selectBooleanButton>
+				</p:column>
+				<p:column headerText="Viernes" >
+				<p:selectBooleanButton id="viernes" value="#{item.viernes}" onLabel="Yes" offLabel="No" style="width:60px" >
+				<p:ajax update="form1:msgs form1:panel" listener="#{actividadAdminControllernew.cargarTablaNuevesActividades}" />
+				</p:selectBooleanButton>
+				</p:column>			
+			</p:dataTable>	
+			
+			  
+			
+				 <!-- update="messages" action="#{actividadAdminC.createNewActividad()}" actionListener="#{actividadAdminC.}"-->
+			<h:panelGrid columns="2" cellpadding="5">
+				 <p:outputLabel for="nombre_act" value="Nombre actividad: " />
+            
+  
+				
+
+
+			
+
+
+			</h:panelGrid>
+			<p:commandButton value="Save" ajax="false"
+				actionListener="#{actividadAdminControllernew.cargarTablaNuevesActividades()}" icon="ui-icon-disk"
+				update="messages panel"  />
+				
+				
+				
+				
+				<p:dataTable id="panel" var="item" 
+				value="#{actividadAdminControllernew.newFechaActividadList}" widgetVar="OrgaTable"
+				emptyMessage="No se han asignado dias para actividad ">
+				
+				
+
+				<p:column  headerText="Fecha actividad">
+					<h:outputText value="#{item.fecha}" />
+				</p:column>
+				<p:column  headerText="Nombre actividad">
+					<h:outputText value="#{item.nombre_act}" />
+				</p:column>
+				
+			
+
+			</p:dataTable>
+
+
+		</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>

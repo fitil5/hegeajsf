@@ -1,0 +1,26 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/layout/templateAdmin.xhtml">
+
+	<ui:define name="body">
+	<b:jumbotron>
+		<h:form>
+
+			<h:panelGrid columns="1" cellpadding="5">
+
+				<h:outputLabel for="nombre_ac" value="Nombre actividad: " />
+				<p:inputText id="nombreactividad" label="Nombre actividad"
+					value="#{actividadAdminControllernew.newActividad.nombre_ac}" />		
+			</h:panelGrid>
+			<p:commandButton value="Save" ajax="false"
+				actionListener="#{actividadAdminControllernew. createNewActividad()}" icon="ui-icon-disk"
+				update="messages" />
+
+		</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>

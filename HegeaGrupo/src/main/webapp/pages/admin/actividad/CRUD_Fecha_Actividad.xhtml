@@ -1,0 +1,45 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/layout/templateAdmin.xhtml">
+
+	<ui:define name="body">
+	<b:jumbotron>
+		<h:form id="form">
+
+			<p:dataTable id="panelFechaActividades" var="item" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="2,5,10,15"
+				value="#{actividadAdminControllernew.listFechaActividadDTO}" widgetVar="fechaactividadTable"
+				emptyMessage="No se han encontrado fecha de actividades "
+				filteredValue="#{actividadAdminControllernew.listFechaActividadDTO}">
+				<f:facet name="header">
+					<p:outputPanel>
+						<h:outputText value="Busqueda de fecha Actividades: " />
+						<p:inputText id="globalFilter" onkeyup="PF('panelFechaActividades').filter()"
+							style="width:150px" placeholder="Ej. A709010" />
+					</p:outputPanel>
+				</f:facet>
+				<p:column filterBy="#{item.fecha}" headerText="Fecha actividad"
+					filterMatchMode="contains">
+					<h:outputText value="#{item.fecha}" />
+				</p:column>
+
+				<p:column filterBy="#{item.nombre_act}" headerText="Nombre actividad"
+					filterMatchMode="contains">
+					<h:outputText value="#{item.nombre_act}" />
+				</p:column>
+
+				
+				
+
+			</p:dataTable>
+
+
+		</h:form>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>

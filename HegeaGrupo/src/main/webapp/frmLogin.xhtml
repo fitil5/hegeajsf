@@ -1,0 +1,36 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/layout/templateSinMenu.xhtml">
+
+	<ui:define name="body">
+		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+		<h:form prependId="false">
+
+			<p:outputLabel
+				style="color:red; font-weight: bold; text-decoration: underline; font-size:30px; "
+				value="#{loginController.mensaje} "
+				rendered="${!empty param['error']}" />
+
+
+			<h:panelGrid columns="3" cellpadding="3">
+
+
+
+				<h:outputLabel for="username" value="DAS:" />
+				<p:inputText id="username" name="username" label="nombre" />
+				<br />
+				<h:outputLabel for="password" value="PASSWORD: " />
+				<p:password id="password" name="password" label="pass" />
+				<br />
+				<br />
+				<p:commandButton value="Enviar" ajax="false" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
