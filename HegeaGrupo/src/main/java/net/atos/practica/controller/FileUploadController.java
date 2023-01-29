@@ -66,7 +66,7 @@ public class FileUploadController extends java.lang.Object{
 	 
 	public void excel() throws FileNotFoundException, Exception {
 		
-		Workbook workbook = WorkbookFactory.create(new FileInputStream("C:\\Users\\Gaming\\Desktop\\hegeaRetocado\\hegeaRetocado3\\src\\main\\webapp\\pages\\admin\\upload\\carga_parcial.xlsx"));
+		Workbook workbook = WorkbookFactory.create(new FileInputStream("C:\\Desktop\\hegeaRetocado\\hegeaRetocado3\\src\\main\\webapp\\pages\\admin\\upload\\carga_parcial.xlsx"));
 	// Getting the Sheet at index zero
     Sheet sheet = workbook.getSheetAt(0);
 
